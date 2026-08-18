@@ -19,6 +19,7 @@
 html,
 body {
   min-height: 100%;
+  touch-action: manipulation;
 }
 
 body {
@@ -31,6 +32,7 @@ body {
   color: var(--text);
   font-family: "Orbitron", "Arial Narrow", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
   letter-spacing: 0;
+  user-select: none;
 }
 
 button {
@@ -38,6 +40,7 @@ button {
   color: inherit;
   font: inherit;
   cursor: pointer;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -135,7 +138,7 @@ h1 {
   height: 100%;
   display: grid;
   grid-template-rows: repeat(16, minmax(32px, 1fr));
-  gap: 4px;
+  gap: 2px;
 }
 
 .level {
@@ -187,6 +190,13 @@ h1 {
 .control {
   min-height: 64px;
   background: rgba(7, 22, 38, 0.82);
+  transition: filter 90ms ease, transform 90ms ease, box-shadow 90ms ease;
+}
+
+.control:active {
+  filter: brightness(1.35);
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 0 18px rgba(166, 222, 255, 0.28);
 }
 
 .control span {
