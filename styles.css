@@ -18,12 +18,14 @@
 
 html,
 body {
+  height: 100%;
   min-height: 100%;
   touch-action: manipulation;
 }
 
 body {
   margin: 0;
+  overflow: hidden;
   overflow-x: hidden;
   background:
     radial-gradient(circle at 70% 28%, rgba(97, 187, 227, 0.22), transparent 18rem),
@@ -59,7 +61,8 @@ button {
 .app {
   position: relative;
   z-index: 1;
-  min-height: 100svh;
+  height: 100dvh;
+  min-height: 0;
   padding: env(safe-area-inset-top) 16px max(20px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
@@ -121,8 +124,8 @@ h1 {
 
 .meter-wrap {
   position: relative;
-  flex: 1;
-  min-height: 430px;
+  flex: 1 1 auto;
+  min-height: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -137,7 +140,7 @@ h1 {
   padding: 8px 10px;
   height: 100%;
   display: grid;
-  grid-template-rows: repeat(16, minmax(32px, 1fr));
+  grid-template-rows: repeat(16, minmax(0, 1fr));
   gap: 2px;
 }
 
@@ -145,6 +148,7 @@ h1 {
   display: grid;
   grid-template-columns: 54px minmax(0, 1fr);
   align-items: center;
+  min-height: 0;
   border-radius: 7px;
   padding: 2px 10px 2px 4px;
   transition: background 140ms ease, transform 140ms ease;
@@ -157,7 +161,7 @@ h1 {
 }
 
 .level-number {
-  font-size: clamp(1.26rem, 7.1vw, 2.34rem);
+  font-size: clamp(1rem, min(7.1vw, 3.7dvh), 2.34rem);
   font-weight: 900;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -172,7 +176,7 @@ h1 {
 
 .level-label {
   min-width: 0;
-  font-size: clamp(1.08rem, 6.1vw, 2.05rem);
+  font-size: clamp(0.92rem, min(6.1vw, 3.1dvh), 2.05rem);
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
@@ -184,10 +188,11 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
   gap: 6px;
+  flex: 0 0 auto;
 }
 
 .control {
-  min-height: 64px;
+  min-height: clamp(52px, 8.6dvh, 64px);
   background: rgba(7, 22, 38, 0.82);
   transition: filter 90ms ease, transform 90ms ease, box-shadow 90ms ease;
 }
@@ -218,11 +223,8 @@ h1 {
 }
 
 @media (max-height: 720px) {
-  .meter-wrap {
-    min-height: 360px;
-  }
-
   .meter {
-    padding-top: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 }
