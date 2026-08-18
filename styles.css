@@ -41,6 +41,10 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+.level {
+  pointer-events: none;
+}
+
 #stars {
   position: fixed;
   inset: 0;

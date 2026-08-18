@@ -67,7 +67,6 @@ function renderMeter() {
       <span class="level-label">${label}</span>
     `;
 
-    item.addEventListener("click", () => setLevel(level));
     meter.appendChild(item);
   });
 }
