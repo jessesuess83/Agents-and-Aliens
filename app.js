@@ -10,6 +10,7 @@ const restartBtn = document.querySelector("#restartBtn");
 
 let state = loadState();
 let loseModalShown = false;
+let wakeLock = null;
 
 function loadState() {
   try {
@@ -99,19 +100,36 @@ function hideLoseModal() {
   loseModal.hidden = true;
 }
 
+async function requestWakeLock() {
+  if (!("wakeLock" in navigator) || wakeLock) return;
+
+  try {
+    wakeLock = await navigator.wakeLock.request("screen");
+    wakeLock.addEventListener("release", () => {
+      wakeLock = null;
+    });
+  } catch {
+    wakeLock = null;
+  }
+}
+
 document.querySelector("#downBtn").addEventListener("click", () => {
+  requestWakeLock();
   setLevel(state.level - 1);
 });
 
 document.querySelector("#upBtn").addEventListener("click", () => {
+  requestWakeLock();
   setLevel(state.level + 1);
 });
 
 document.querySelector("#resetBtn").addEventListener("click", () => {
+  requestWakeLock();
   setLevel(0);
 });
 
 restartBtn.addEventListener("click", () => {
+  requestWakeLock();
   state.level = 0;
   loseModalShown = false;
   hideLoseModal();
@@ -133,6 +151,12 @@ restartBtn.addEventListener("pointerdown", () => restartBtn.classList.add("press
 restartBtn.addEventListener("pointerup", () => restartBtn.classList.remove("pressed"));
 restartBtn.addEventListener("pointercancel", () => restartBtn.classList.remove("pressed"));
 restartBtn.addEventListener("pointerleave", () => restartBtn.classList.remove("pressed"));
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    requestWakeLock();
+  }
+});
 
 function initStars() {
   const canvas = document.querySelector("#stars");

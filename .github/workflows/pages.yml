@@ -32,6 +32,7 @@ jobs:
         run: |
           mkdir _site
           cp index.html styles.css app.js manifest.webmanifest _site/
+          cp -R icons _site/
           sed -i "s/styles.css/styles.css?v=${GITHUB_SHA}/" _site/index.html
           sed -i "s/app.js/app.js?v=${GITHUB_SHA}/" _site/index.html
           touch _site/.nojekyll
