@@ -193,7 +193,10 @@ h1 {
 
 .control {
   min-height: clamp(52px, 8.6dvh, 64px);
-  background: rgba(7, 22, 38, 0.82);
+  background: linear-gradient(180deg, #33424c 0%, #121e27 100%);
+  border-color: rgba(188, 219, 235, 0.48);
+  color: #d7e5ed;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
   transition: filter 90ms ease, transform 90ms ease, box-shadow 90ms ease;
 }
 
@@ -201,7 +204,9 @@ h1 {
 .control.pressed {
   filter: brightness(1.35);
   transform: translateY(1px) scale(0.97);
-  box-shadow: 0 0 18px rgba(166, 222, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 18px rgba(166, 222, 255, 0.28);
 }
 
 .control span {
@@ -214,6 +219,7 @@ h1 {
   color: #07111c;
   background: linear-gradient(180deg, #ffda3d, #ff8b22);
   border-color: rgba(255, 213, 38, 0.8);
+  box-shadow: none;
 }
 
 @media (min-width: 620px) {
