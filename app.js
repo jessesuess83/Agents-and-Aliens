@@ -7,6 +7,8 @@ const defaultState = { level: 0 };
 const meter = document.querySelector("#meter");
 const loseModal = document.querySelector("#loseModal");
 const restartBtn = document.querySelector("#restartBtn");
+const rerollModal = document.querySelector("#rerollModal");
+const rerollOkayBtn = document.querySelector("#rerollOkayBtn");
 
 let state = loadState();
 let loseModalShown = false;
@@ -87,6 +89,8 @@ function setLevel(level) {
 
   if (previousLevel < MAX_LEVEL && state.level === MAX_LEVEL) {
     showLoseModal();
+  } else if (previousLevel !== state.level && (state.level === 5 || state.level === 10)) {
+    showRerollModal();
   }
 }
 
@@ -98,6 +102,15 @@ function showLoseModal() {
 
 function hideLoseModal() {
   loseModal.hidden = true;
+}
+
+function showRerollModal() {
+  rerollModal.hidden = false;
+  rerollOkayBtn.focus({ preventScroll: true });
+}
+
+function hideRerollModal() {
+  rerollModal.hidden = true;
 }
 
 async function requestWakeLock() {
@@ -136,6 +149,11 @@ restartBtn.addEventListener("click", () => {
   render();
 });
 
+rerollOkayBtn.addEventListener("click", () => {
+  requestWakeLock();
+  hideRerollModal();
+});
+
 document.querySelectorAll(".control").forEach((button) => {
   const release = () => button.classList.remove("pressed");
 
@@ -151,6 +169,11 @@ restartBtn.addEventListener("pointerdown", () => restartBtn.classList.add("press
 restartBtn.addEventListener("pointerup", () => restartBtn.classList.remove("pressed"));
 restartBtn.addEventListener("pointercancel", () => restartBtn.classList.remove("pressed"));
 restartBtn.addEventListener("pointerleave", () => restartBtn.classList.remove("pressed"));
+
+rerollOkayBtn.addEventListener("pointerdown", () => rerollOkayBtn.classList.add("pressed"));
+rerollOkayBtn.addEventListener("pointerup", () => rerollOkayBtn.classList.remove("pressed"));
+rerollOkayBtn.addEventListener("pointercancel", () => rerollOkayBtn.classList.remove("pressed"));
+rerollOkayBtn.addEventListener("pointerleave", () => rerollOkayBtn.classList.remove("pressed"));
 
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {

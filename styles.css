@@ -286,6 +286,71 @@ h1 {
   transform: translateY(1px) scale(0.97);
 }
 
+.reroll-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(2, 7, 14, 0.82);
+}
+
+.reroll-modal[hidden] {
+  display: none;
+}
+
+.reroll-box {
+  width: min(100%, 370px);
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 16px 14px 18px;
+  border: 1px solid rgba(255, 117, 24, 0.78);
+  border-radius: 8px;
+  background: rgba(11, 11, 12, 0.94);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 20px 48px rgba(0, 0, 0, 0.7);
+  animation: rerollBoxIn 220ms ease-out both;
+}
+
+.reroll-image {
+  display: block;
+  width: 100%;
+  max-height: 38dvh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.reroll-box h2 {
+  margin: 0;
+  color: var(--orange);
+  font-size: clamp(1.55rem, 8vw, 2.65rem);
+  font-weight: 900;
+  line-height: 1.02;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.okay-button {
+  min-width: 172px;
+  min-height: 56px;
+  border: 1px solid rgba(255, 213, 38, 0.86);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffda3d, #ff8b22);
+  color: #07111c;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: filter 90ms ease, transform 90ms ease;
+}
+
+.okay-button:active,
+.okay-button.pressed {
+  filter: brightness(1.18);
+  transform: translateY(1px) scale(0.97);
+}
+
 @keyframes skullExpand {
   from {
     opacity: 0;
@@ -312,6 +377,18 @@ h1 {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes rerollBoxIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
