@@ -1,0 +1,9 @@
+{
+  "name": "Agents & Aliens Alert Level Tracker",
+  "short_name": "Alert Tracker",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#06111f",
+  "theme_color": "#06111f",
+  "orientation": "portrait"
+}

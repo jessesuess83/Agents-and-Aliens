@@ -1,0 +1,215 @@
+:root {
+  color-scheme: dark;
+  --bg: #06111f;
+  --panel: rgba(4, 14, 27, 0.76);
+  --line: rgba(166, 222, 255, 0.22);
+  --text: #eef9ff;
+  --muted: #9eb7ca;
+  --green: #27ff58;
+  --lime: #ccff2f;
+  --yellow: #ffd526;
+  --orange: #ff7518;
+  --red: #ff1717;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 70% 28%, rgba(97, 187, 227, 0.22), transparent 18rem),
+    radial-gradient(circle at 14% 68%, rgba(143, 255, 209, 0.12), transparent 14rem),
+    linear-gradient(160deg, #020813 0%, var(--bg) 48%, #091a2b 100%);
+  color: var(--text);
+  font-family: "Orbitron", "Arial Narrow", "Avenir Next Condensed", "Trebuchet MS", sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  padding: env(safe-area-inset-top) 16px max(20px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.topbar {
+  display: block;
+  padding-top: 0;
+}
+
+.game-title {
+  display: block;
+  width: 94%;
+  max-width: 410px;
+  height: auto;
+  margin: 0 auto 7px;
+  overflow: visible;
+}
+
+.game-title text {
+  fill: url("#silverFill");
+  stroke: url("#silverStroke");
+  stroke-width: 4px;
+  paint-order: stroke fill;
+  font-family: "Orbitron", "Arial Narrow", sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  stroke-width: 3px;
+}
+
+h1 {
+  margin: 0;
+  color: var(--orange);
+  font-size: clamp(1.54rem, 7.7vw, 2.74rem);
+  font-weight: 900;
+  line-height: 0.85;
+  text-transform: uppercase;
+  text-shadow: 0 0 14px rgba(255, 117, 24, 0.26);
+}
+
+.tracker-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.control {
+  border: 1px solid var(--line);
+  background: rgba(8, 25, 44, 0.72);
+  border-radius: 8px;
+  min-height: 48px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.meter-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 430px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.meter {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 12px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(16, minmax(32px, 1fr));
+  gap: 4px;
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  border-radius: 7px;
+  padding: 0 8px 0 0;
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.level.current {
+  background: rgba(255, 255, 255, 0.1);
+  outline: 1px solid currentColor;
+  box-shadow: 0 0 18px color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.level-number {
+  font-size: clamp(1.26rem, 7.1vw, 2.34rem);
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.skull-icon {
+  display: block;
+  width: 1.3em;
+  height: 1.3em;
+  fill: var(--red);
+  filter: drop-shadow(0 0 8px rgba(255, 23, 23, 0.72));
+}
+
+.level-label {
+  min-width: 0;
+  font-size: clamp(1.08rem, 6.1vw, 2.05rem);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 8px;
+}
+
+.control {
+  min-height: 64px;
+  background: rgba(7, 22, 38, 0.82);
+}
+
+.control span {
+  display: block;
+  font-size: 3rem;
+  line-height: 0.7;
+}
+
+.control.reset {
+  color: #07111c;
+  background: linear-gradient(180deg, #ffda3d, #ff8b22);
+  border-color: rgba(255, 213, 38, 0.8);
+}
+
+@media (min-width: 620px) {
+  .app {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-height: 720px) {
+  .meter-wrap {
+    min-height: 360px;
+  }
+
+  .meter {
+    padding-top: 10px;
+  }
+}

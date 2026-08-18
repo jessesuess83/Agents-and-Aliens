@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#06111f">
+    <title>Alert Level Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <main class="app" aria-label="Alert Level Tracker">
+      <header class="topbar">
+        <div>
+          <svg class="game-title" viewBox="0 0 420 76" role="img" aria-labelledby="gameTitle">
+            <title id="gameTitle">Agents & Aliens</title>
+            <defs>
+              <linearGradient id="silverFill" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#344958"/>
+                <stop offset="50%" stop-color="#f8fdff"/>
+                <stop offset="100%" stop-color="#344958"/>
+              </linearGradient>
+              <linearGradient id="silverStroke" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#dbe7ee"/>
+                <stop offset="45%" stop-color="#07111a"/>
+                <stop offset="100%" stop-color="#6f8796"/>
+              </linearGradient>
+            </defs>
+            <g>
+              <text x="210" y="58" text-anchor="middle">Agents & Aliens</text>
+            </g>
+          </svg>
+          <h1>Alert Level</h1>
+        </div>
+      </header>
+
+      <section class="tracker-panel" aria-label="Tracker controls">
+        <div class="meter-wrap">
+          <ol class="meter" id="meter" aria-label="Alert levels from 15 down to 0"></ol>
+        </div>
+
+        <div class="controls" aria-label="Adjust alert level">
+          <button class="control ghost" id="downBtn" type="button" aria-label="Decrease alert level">
+            <span aria-hidden="true">-</span>
+          </button>
+          <button class="control reset" id="resetBtn" type="button">Reset</button>
+          <button class="control ghost" id="upBtn" type="button" aria-label="Increase alert level">
+            <span aria-hidden="true">+</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
