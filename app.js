@@ -93,6 +93,17 @@ document.querySelector("#resetBtn").addEventListener("click", () => {
   setLevel(0);
 });
 
+document.querySelectorAll(".control").forEach((button) => {
+  const release = () => button.classList.remove("pressed");
+
+  button.addEventListener("pointerdown", () => {
+    button.classList.add("pressed");
+  });
+  button.addEventListener("pointerup", release);
+  button.addEventListener("pointercancel", release);
+  button.addEventListener("pointerleave", release);
+});
+
 function initStars() {
   const canvas = document.querySelector("#stars");
   const context = canvas.getContext("2d");
