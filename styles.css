@@ -222,6 +222,99 @@ h1 {
   box-shadow: none;
 }
 
+.lose-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(2, 7, 14, 0.86);
+}
+
+.lose-modal[hidden] {
+  display: none;
+}
+
+.lose-box {
+  width: min(100%, 360px);
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px 18px 20px;
+  border: 1px solid rgba(255, 23, 23, 0.75);
+  border-radius: 8px;
+  background: rgba(8, 12, 18, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 20px 48px rgba(0, 0, 0, 0.72);
+  animation: loseBoxIn 280ms ease-out both;
+}
+
+.lose-skull {
+  width: min(58vw, 210px);
+  height: min(58vw, 210px);
+  fill: var(--red);
+  animation: skullExpand 420ms cubic-bezier(0.18, 0.9, 0.24, 1.28) both;
+}
+
+.lose-box h2 {
+  margin: 0;
+  color: var(--red);
+  font-size: clamp(2.2rem, 12vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.restart-button {
+  min-width: 190px;
+  min-height: 58px;
+  border: 1px solid rgba(255, 213, 38, 0.86);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffda3d, #ff8b22);
+  color: #07111c;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: filter 90ms ease, transform 90ms ease;
+}
+
+.restart-button:active,
+.restart-button.pressed {
+  filter: brightness(1.18);
+  transform: translateY(1px) scale(0.97);
+}
+
+@keyframes skullExpand {
+  from {
+    opacity: 0;
+    transform: scale(0.12);
+  }
+
+  68% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes loseBoxIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (min-width: 620px) {
   .app {
     max-width: 460px;

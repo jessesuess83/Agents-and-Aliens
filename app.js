@@ -5,8 +5,11 @@ const levels = Array.from({ length: MAX_LEVEL + 1 }, (_, index) => MAX_LEVEL - i
 const defaultState = { level: 0 };
 
 const meter = document.querySelector("#meter");
+const loseModal = document.querySelector("#loseModal");
+const restartBtn = document.querySelector("#restartBtn");
 
 let state = loadState();
+let loseModalShown = false;
 
 function loadState() {
   try {
@@ -77,8 +80,23 @@ function render() {
 }
 
 function setLevel(level) {
+  const previousLevel = state.level;
   state.level = clampLevel(level);
   render();
+
+  if (previousLevel < MAX_LEVEL && state.level === MAX_LEVEL) {
+    showLoseModal();
+  }
+}
+
+function showLoseModal() {
+  loseModalShown = true;
+  loseModal.hidden = false;
+  restartBtn.focus({ preventScroll: true });
+}
+
+function hideLoseModal() {
+  loseModal.hidden = true;
 }
 
 document.querySelector("#downBtn").addEventListener("click", () => {
@@ -93,6 +111,13 @@ document.querySelector("#resetBtn").addEventListener("click", () => {
   setLevel(0);
 });
 
+restartBtn.addEventListener("click", () => {
+  state.level = 0;
+  loseModalShown = false;
+  hideLoseModal();
+  render();
+});
+
 document.querySelectorAll(".control").forEach((button) => {
   const release = () => button.classList.remove("pressed");
 
@@ -103,6 +128,11 @@ document.querySelectorAll(".control").forEach((button) => {
   button.addEventListener("pointercancel", release);
   button.addEventListener("pointerleave", release);
 });
+
+restartBtn.addEventListener("pointerdown", () => restartBtn.classList.add("pressed"));
+restartBtn.addEventListener("pointerup", () => restartBtn.classList.remove("pressed"));
+restartBtn.addEventListener("pointercancel", () => restartBtn.classList.remove("pressed"));
+restartBtn.addEventListener("pointerleave", () => restartBtn.classList.remove("pressed"));
 
 function initStars() {
   const canvas = document.querySelector("#stars");
@@ -139,3 +169,7 @@ function initStars() {
 
 initStars();
 render();
+
+if (state.level === MAX_LEVEL && !loseModalShown) {
+  showLoseModal();
+}
