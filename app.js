@@ -9,6 +9,9 @@ const loseModal = document.querySelector("#loseModal");
 const restartBtn = document.querySelector("#restartBtn");
 const rerollModal = document.querySelector("#rerollModal");
 const rerollOkayBtn = document.querySelector("#rerollOkayBtn");
+const resetModal = document.querySelector("#resetModal");
+const resetYesBtn = document.querySelector("#resetYesBtn");
+const resetNoBtn = document.querySelector("#resetNoBtn");
 
 let state = loadState();
 let loseModalShown = false;
@@ -113,6 +116,15 @@ function hideRerollModal() {
   rerollModal.hidden = true;
 }
 
+function showResetModal() {
+  resetModal.hidden = false;
+  resetNoBtn.focus({ preventScroll: true });
+}
+
+function hideResetModal() {
+  resetModal.hidden = true;
+}
+
 async function requestWakeLock() {
   if (!("wakeLock" in navigator) || wakeLock) return;
 
@@ -144,7 +156,7 @@ document.querySelector("#upBtn").addEventListener("click", () => {
 
 document.querySelector("#resetBtn").addEventListener("click", () => {
   requestWakeLock();
-  setLevel(0);
+  showResetModal();
 });
 
 restartBtn.addEventListener("click", () => {
@@ -158,6 +170,17 @@ restartBtn.addEventListener("click", () => {
 rerollOkayBtn.addEventListener("click", () => {
   requestWakeLock();
   hideRerollModal();
+});
+
+resetYesBtn.addEventListener("click", () => {
+  requestWakeLock();
+  hideResetModal();
+  setLevel(0);
+});
+
+resetNoBtn.addEventListener("click", () => {
+  requestWakeLock();
+  hideResetModal();
 });
 
 document.querySelectorAll(".control").forEach((button) => {
@@ -180,6 +203,17 @@ rerollOkayBtn.addEventListener("pointerdown", () => rerollOkayBtn.classList.add(
 rerollOkayBtn.addEventListener("pointerup", () => rerollOkayBtn.classList.remove("pressed"));
 rerollOkayBtn.addEventListener("pointercancel", () => rerollOkayBtn.classList.remove("pressed"));
 rerollOkayBtn.addEventListener("pointerleave", () => rerollOkayBtn.classList.remove("pressed"));
+
+document.querySelectorAll(".reset-choice").forEach((button) => {
+  const release = () => button.classList.remove("pressed");
+
+  button.addEventListener("pointerdown", () => {
+    button.classList.add("pressed");
+  });
+  button.addEventListener("pointerup", release);
+  button.addEventListener("pointercancel", release);
+  button.addEventListener("pointerleave", release);
+});
 
 document.addEventListener("visibilitychange", () => {
   requestWakeLockWhenVisible();
