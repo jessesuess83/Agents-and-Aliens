@@ -126,6 +126,12 @@ async function requestWakeLock() {
   }
 }
 
+function requestWakeLockWhenVisible() {
+  if (document.visibilityState === "visible") {
+    requestWakeLock();
+  }
+}
+
 document.querySelector("#downBtn").addEventListener("click", () => {
   requestWakeLock();
   setLevel(state.level - 1);
@@ -176,9 +182,15 @@ rerollOkayBtn.addEventListener("pointercancel", () => rerollOkayBtn.classList.re
 rerollOkayBtn.addEventListener("pointerleave", () => rerollOkayBtn.classList.remove("pressed"));
 
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") {
-    requestWakeLock();
-  }
+  requestWakeLockWhenVisible();
+});
+
+document.addEventListener("pointerdown", () => {
+  requestWakeLockWhenVisible();
+});
+
+window.addEventListener("pageshow", () => {
+  requestWakeLockWhenVisible();
 });
 
 function initStars() {
